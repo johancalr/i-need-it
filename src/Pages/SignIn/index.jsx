@@ -1,11 +1,11 @@
+import { PagesLayout } from "../../Layouts/PagesLayout";
+
 function SignIn() {
 
   return (
-    <>
-      <div className='bg-red-100'>
-        SignIn
-      </div>
-    </>
+    <PagesLayout>
+      SignIn
+    </PagesLayout>
   )
 }
 

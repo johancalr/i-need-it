@@ -1,11 +1,11 @@
+import { PagesLayout } from "../../Layouts/PagesLayout";
+
 function NotFound() {
 
   return (
-    <>
-      <div className='bg-red-100'>
-        NotFound
-      </div>
-    </>
+    <PagesLayout>
+      NotFound
+    </PagesLayout>
   )
 }
 
