@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { StoreContext } from "../../Context";
 
 function Navbar () {
   const activeStyle = 'underline underline-offset-4'
+  const context = useContext(StoreContext);
   return(
     <nav className='flex justify-between items-center fixed top-0 z-10 w-full py-5 px-8 text-sm font-light'>
       <ul className="flex items-center gap-3">
@@ -91,7 +94,7 @@ function Navbar () {
         </li>
         <li>
           <NavLink>
-            Store-icon 0
+            &#128722; {context.count}
           </NavLink>
         </li>
       </ul>
