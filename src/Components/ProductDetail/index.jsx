@@ -2,6 +2,7 @@ import {XMarkIcon} from '@heroicons/react/24/outline';
 import './styles.css';
 import { useContext } from 'react';
 import { StoreContext } from '../../Context';
+import { ProductRating } from '../ProductRating';
 function ProductDetail() {
   const context = useContext(StoreContext);
   return (
@@ -15,11 +16,14 @@ function ProductDetail() {
       <figure>
         <img src={context.productInfo.image} alt='description' />
       </figure>
-      <p className='flex flex-col'>
-        <b className='text-3xl mb-2'>$ {context.productInfo.price}</b>
+      <div className='flex flex-col'>
+        <span className='inline-flex items-center justify-between'>
+          <b className='text-3xl me-2'>$ {context.productInfo.price} </b>
+          <ProductRating data={context.productInfo.rating}/>
+        </span>
         <b>{context.productInfo.title}</b>
         <small>{context.productInfo.description}</small>
-      </p>
+      </div>
     </aside>
   );
 }
