@@ -7,7 +7,7 @@ import { ProductDetail } from "../../Components/ProductDetail";
 function Home() {
   const [products, setProducts] = useState(null);
   useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products')
+    fetch('https://fakestoreapi.com/products')
     .then(respose => respose.json())
     .then(data => setProducts(data));
   }, [])

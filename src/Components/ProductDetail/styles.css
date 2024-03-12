@@ -1,4 +1,11 @@
 .product-detail {
   width: 360px;
   height: calc(100vh - 80px);
+  transition: all 0.8s;
+  opacity: 1;
+}
+.product-detail.closed {
+  width: 250px;
+  opacity: 0;
+  pointer-events: none;
 }
