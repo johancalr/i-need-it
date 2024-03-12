@@ -10,6 +10,14 @@ function StoreProvider({children}) {
   const closeProductDetail = () => setDetailing(false);
   // Product detail info
   const [productInfo, setProductInfo] = useState({});
+  // Checkout Side Menu display
+  const [checking, setChecking] = useState(false);
+  const openChecking = () => setChecking(true);
+  const closeChecking = () => setChecking(false);
+  // Cart
+  const [cartProducts, setCartProducts] = useState([]);
+  console.log('check', checking);
+  console.log('detail',detailing);
 
   return (
     <StoreContext.Provider value={{
@@ -19,7 +27,12 @@ function StoreProvider({children}) {
       openProductDetail,
       closeProductDetail,
       productInfo,
-      setProductInfo
+      setProductInfo,
+      cartProducts,
+      setCartProducts,
+      checking,
+      openChecking,
+      closeChecking
     }}>
       {children}
     </StoreContext.Provider>

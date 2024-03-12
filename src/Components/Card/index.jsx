@@ -7,11 +7,21 @@ function Card ({data}) {
   const showProductDetail = (productInfo) =>{
     context.setProductInfo(productInfo);
     context.openProductDetail();
-  }
-  let title = data.title;
-  if (title.length > 45){
-    title = title.slice(0,40)+' ...';
-  }
+    context.closeChecking();
+  };
+  const getTitle = (title) => {
+    if (title.length > 45)
+      title = title.slice(0,40)+' ...';
+    return title;
+  };
+  const addProductToCart = (event, productData) => {
+    event.stopPropagation();
+    context.setCount(context.count + 1);
+    context.setCartProducts([...context.cartProducts,productData]);
+    // Close detailing -> Open checking
+    context.closeProductDetail();
+    context.openChecking();
+  };
   return(
     <div className='bg-white cursor-pointer w-56 h-60 rounded-lg'
       onClick={() => showProductDetail(data)}
@@ -22,13 +32,13 @@ function Card ({data}) {
         </span>
         <img className='w-full h-full object-cover rounded-lg' src={data.image} alt={`${data.title} description`} />
         <div className='absolute top-0 right-0  flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1 border'
-          onClick={() => context.setCount(context.count + 1)}
+          onClick={(event) => addProductToCart(event, data)}
         >
           <PlusIcon className="text-black"/>
         </div>
       </figure>
       <p className='flex justify-between'>
-        <span className='text-sm font-light leading-none'>{title}</span>
+        <span className='text-sm font-light leading-none'>{getTitle(data.title)}</span>
         <span className='text-lg font-medium'>${data.price}</span>
       </p>
     </div>
