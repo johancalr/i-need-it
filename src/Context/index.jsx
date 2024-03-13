@@ -16,8 +16,6 @@ function StoreProvider({children}) {
   const closeChecking = () => setChecking(false);
   // Cart
   const [cartProducts, setCartProducts] = useState([]);
-  console.log('check', checking);
-  console.log('detail',detailing);
 
   return (
     <StoreContext.Provider value={{
