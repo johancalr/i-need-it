@@ -9,8 +9,9 @@ import { Link } from 'react-router-dom';
 function CheckoutSideMenu() {
   const context = useContext(StoreContext);
   const handleCheckout = () => {
+    const setZero = (n) => { return n < 10 ? `0${n}` : n; }
     const orderToAdd = {
-      date: '13.03.24',
+      date: `${new Date().getFullYear()}-${setZero(new Date().getMonth() + 1)}-${setZero(new Date().getDate())}`,
       products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts)
