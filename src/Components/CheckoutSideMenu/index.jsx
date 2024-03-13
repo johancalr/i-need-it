@@ -35,6 +35,7 @@ function CheckoutSideMenu() {
               title={product.title}
               image={product.image}
               price={product.price}
+              isRemovable={true}
             />
           ))
         }
