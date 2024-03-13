@@ -1,6 +1,9 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useContext } from "react";
+import { StoreContext } from "../../Context";
 
-function OderCard({title, image, price}) {
+function OderCard({id, title, image, price}) {
+  const context = useContext(StoreContext);
   return(
     <div className='flex justify-between items-center mb-2 border rounded-lg'>
       <div className='flex items-center gap-2'>
@@ -11,7 +14,7 @@ function OderCard({title, image, price}) {
       </div>
       <div className='flex items-center gap-2'>
         <p className='text-lg font-medium whitespace-nowrap'>${price}</p>
-        <XMarkIcon className='h-6 w-6 text-black cursor-pointer'/>
+        <XMarkIcon onClick={() => context.removeCartProduct(id)} className='h-6 w-6 text-black cursor-pointer'/>
       </div>
     </div>
   );

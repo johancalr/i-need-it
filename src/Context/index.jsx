@@ -16,6 +16,10 @@ function StoreProvider({children}) {
   const closeChecking = () => setChecking(false);
   // Cart
   const [cartProducts, setCartProducts] = useState([]);
+  const removeCartProduct = (id) => {
+    const filteredProducts = cartProducts.filter(product => product.id != id);
+    setCartProducts(filteredProducts);
+  };
 
   return (
     <StoreContext.Provider value={{
@@ -28,6 +32,7 @@ function StoreProvider({children}) {
       setProductInfo,
       cartProducts,
       setCartProducts,
+      removeCartProduct,
       checking,
       openChecking,
       closeChecking
