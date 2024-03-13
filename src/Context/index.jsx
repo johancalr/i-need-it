@@ -3,7 +3,6 @@ import { createContext, useState } from "react";
 const StoreContext = createContext();
 
 function StoreProvider({children}) {
-  const [count, setCount] = useState(0);
   // Product detail display
   const [detailing, setDetailing] = useState(false);
   const openProductDetail = () => setDetailing(true);
@@ -20,11 +19,10 @@ function StoreProvider({children}) {
     const filteredProducts = cartProducts.filter(product => product.id != id);
     setCartProducts(filteredProducts);
   };
-
+  // Orders
+  const [order, setOrder] = useState([]);
   return (
     <StoreContext.Provider value={{
-      count,
-      setCount,
       detailing,
       openProductDetail,
       closeProductDetail,
@@ -35,7 +33,9 @@ function StoreProvider({children}) {
       removeCartProduct,
       checking,
       openChecking,
-      closeChecking
+      closeChecking,
+      order,
+      setOrder,
     }}>
       {children}
     </StoreContext.Provider>

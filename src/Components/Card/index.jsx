@@ -16,7 +16,6 @@ function Card ({data}) {
   };
   const addProductToCart = (event, productData) => {
     openCart(event);
-    context.setCount(context.count + 1);
     context.setCartProducts([...context.cartProducts,productData]);
   };
   const openCart = (event) => {
@@ -29,7 +28,7 @@ function Card ({data}) {
     const isInCart = context.cartProducts.filter(product => product.id === id).length > 0;
     return (
       isInCart ?
-        <div className='absolute top-0 right-0  flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1 border bg-teal-500 border-te'
+        <div className='absolute top-0 right-0  flex justify-center items-center w-6 h-6 rounded-full m-2 p-1 border bg-teal-500 border-te'
           onClick={event => openCart(event)}>
           <CheckIcon className='text-white'/>
         </div>

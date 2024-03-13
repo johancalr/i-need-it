@@ -1,12 +1,23 @@
 import { useContext } from 'react';
 import { StoreContext } from '../../Context';
-import {XMarkIcon} from '@heroicons/react/24/outline';
+import {ClipboardDocumentCheckIcon, XMarkIcon} from '@heroicons/react/24/outline';
 import { ProductRating } from '../ProductRating';
 import './styles.css';
 import { OderCard } from '../OrderCard';
 import { totalPrice } from '../../utils';
+import { Link } from 'react-router-dom';
 function CheckoutSideMenu() {
   const context = useContext(StoreContext);
+  const handleCheckout = () => {
+    const orderToAdd = {
+      date: '13.03.24',
+      products: context.cartProducts,
+      totalProducts: context.cartProducts.length,
+      totalPrice: totalPrice(context.cartProducts)
+    };
+    context.setOrder([...context.order, orderToAdd]);
+    context.setCartProducts([]);
+  };
   return (
     <aside className={`checkout-side-menu flex-col fixed top-20 right-0 border border-black bg-white rounded-lg p-4 ${context.checking? 'flex' : 'closed'}`}>
       <div className='flex justify-between items-center p-2 pb-5'>
@@ -15,7 +26,7 @@ function CheckoutSideMenu() {
           <XMarkIcon onClick={() => context.closeChecking()} className="h-7 w-7 text-black cursor-pointer"/>
         </div>
       </div>
-      <div className='overflow-y-scroll'>
+      <div className='overflow-y-scroll flex-1'>
         {
           context.cartProducts.map(product => (
             <OderCard
@@ -29,10 +40,16 @@ function CheckoutSideMenu() {
         }
       </div>
       <div>
-        <p className='flex justify-between items-center mt-2'>
+        <p className='flex justify-between items-center my-2'>
           <span>Total:</span>
           <b>$ {totalPrice(context.cartProducts)}</b>
         </p>
+        <Link to='my-orders/last'>
+          <button className='flex justify-center items-center py-2 w-full bg-black rounded-lg text-teal-500 text-lg' onClick={() => handleCheckout()}>
+            Checkout
+            <ClipboardDocumentCheckIcon className='w-6 h-6 ms-2'/>
+          </button>
+        </Link>
       </div>
     </aside>
   );

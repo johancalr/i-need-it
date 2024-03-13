@@ -95,7 +95,7 @@ function Navbar () {
         </li>
         <li>
           <NavLink className='flex items-end'>
-            <ShoppingBagIcon className="h-6 w-6"/> {context.count}
+            <ShoppingBagIcon className="h-6 w-6"/> {context.cartProducts.length}
           </NavLink>
         </li>
       </ul>
