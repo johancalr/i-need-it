@@ -9,13 +9,15 @@ function MyOrders() {
   return (
     <PagesLayout>
       MyOrders
-      {
-        contex.order.map((data, i) => (
-          <Link key={i} to={`/my-orders/${i}`}>
-            <OrdersCard date={data.date} totalProducts={data.totalProducts} totalPrice={data.totalPrice}/>
-          </Link>
-        ))
-      }
+      <div className='grid grid-cols-4 gap-3'>
+        {
+          contex.order.map((data, i) => (
+            <Link key={i} to={`/my-orders/${i}`}>
+              <OrdersCard date={data.date} totalProducts={data.totalProducts} totalPrice={data.totalPrice}/>
+            </Link>
+          ))
+        }
+      </div>
     </PagesLayout>
   )
 }

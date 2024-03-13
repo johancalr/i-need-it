@@ -11,7 +11,7 @@ function CheckoutSideMenu() {
   const handleCheckout = () => {
     const setZero = (n) => { return n < 10 ? `0${n}` : n; }
     const orderToAdd = {
-      date: `${new Date().getFullYear()}-${setZero(new Date().getMonth() + 1)}-${setZero(new Date().getDate())}`,
+      date: `${setZero(new Date().getDate())}/${setZero(new Date().getMonth() + 1)}/${new Date().getFullYear()}`,
       products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalPrice(context.cartProducts)
