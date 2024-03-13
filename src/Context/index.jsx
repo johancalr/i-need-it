@@ -1,8 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { filteredProductsByTitle } from "../utils";
 
 const StoreContext = createContext();
 
 function StoreProvider({children}) {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [productSearching, setProductSearching] = useState('');
   // Product detail display
   const [detailing, setDetailing] = useState(false);
   const openProductDetail = () => setDetailing(true);
@@ -21,8 +25,26 @@ function StoreProvider({children}) {
   };
   // Orders
   const [order, setOrder] = useState([]);
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+    .then(respose => respose.json())
+    .then(data => setProducts(data));
+  }, [])
+  useEffect(() => {
+    console.log(productSearching);
+    if (productSearching) {
+      setFilteredProducts((filteredProductsByTitle(products, productSearching)));
+    }
+    else {
+      setFilteredProducts(products);
+    }
+  }, [products, productSearching]);
   return (
     <StoreContext.Provider value={{
+      products,
+      productSearching,
+      filteredProducts,
+      setProductSearching,
       detailing,
       openProductDetail,
       closeProductDetail,

@@ -8,4 +8,11 @@ const totalPrice = (products) => {
   return total;
 };
 
-export {totalPrice}
+
+const filteredProductsByTitle = (products, searchValue) => {
+  return products.filter(product =>
+    product.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
+};
+
+export {totalPrice, filteredProductsByTitle}
