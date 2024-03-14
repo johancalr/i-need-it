@@ -4,7 +4,8 @@ function SignIn() {
 
   return (
     <PagesLayout>
-      SignIn
+      <p className='py-2'>SignIn</p>
+      <small className='font-light text-gray-400'><i>coming soon</i></small>
     </PagesLayout>
   )
 }

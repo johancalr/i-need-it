@@ -2,7 +2,7 @@ import { CalendarDaysIcon, ShoppingCartIcon, CurrencyDollarIcon } from "@heroico
 
 function OrdersCard({date, totalProducts, totalPrice}) {
   return(
-    <div className='flex justify-between items-center border rounded-lg p-1'>
+    <div className='flex justify-between items-center border rounded-lg p-1 bg-white'>
       <div>
         <p className='flex items-center text-sm mb-2'>
           <CalendarDaysIcon className='w-5 h-5 mx-1 text-teal-500'/>

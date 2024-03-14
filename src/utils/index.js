@@ -5,7 +5,7 @@
  */
 const totalPrice = (products) => {
   const total = products.reduce((acc, product) => acc + product.price, 0);
-  return total;
+  return total.toFixed(2);
 };
 
 
@@ -27,4 +27,8 @@ const formalizeCategory = (route) => {
   return route;
 }
 
-export {totalPrice, filteredProductsByTitle, filteredProductsByCategory, formalizeCategory}
+const getCategoryTitle = (categories, categoryName) => {
+  return categories.filter(category => formalizeCategory(category) === categoryName)[0];
+}
+
+export {totalPrice, filteredProductsByTitle, filteredProductsByCategory, formalizeCategory, getCategoryTitle}

@@ -1,20 +1,39 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { StoreContext } from "../../Context";
-import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import { formalizeCategory } from "../../utils"
+import DropDown from "../DropDowns/CategoriesDropDown";
+import RoutesDropDown from "../DropDowns/RoutesDropDown";
+import './index.css'
 
 function Navbar () {
-  const activeStyle = 'underline underline-offset-4'
+  const activeStyle = 'underline underline-offset-4 text-purple-500 font-semibold'
   const context = useContext(StoreContext);
   return(
-    <nav className='flex justify-between items-center fixed top-0 z-10 w-full py-5 px-8 text-sm font-light'>
-      <ul className="flex items-center gap-3">
+    <nav className='store-navbar flex justify-between items-center fixed top-0 z-10 w-full px-1 sm:px2 text-sm font-light bg-teal-200'>
+      <ul className="flex md:hidden items-center gap-2">
         <li className="font-semibold text-lg">
           <NavLink
             to='/'
           >
-            I Need It!
+            <span className='flex items-center text-purple-500 leading-none'>
+              <img className='w-11 h-11 me-1' src='/icon.svg' alt="icon" />
+              <small className='font-mono'>I<br/>Need<br/>It!</small>
+            </span>
+          </NavLink>
+        </li>
+        <DropDown/>
+      </ul>
+      <ul className="hidden md:flex items-center gap-3 pe-1">
+        <li className="font-semibold text-lg">
+          <NavLink
+            to='/'
+          >
+            <span className='flex items-center text-purple-500 leading-none'>
+              <img className='w-11 h-11 me-1' src='/icon.svg' alt="icon" />
+              <small className='font-mono'>I<br/>Need<br/>It!</small>
+            </span>
           </NavLink>
         </li>
         <li>
@@ -41,13 +60,11 @@ function Navbar () {
           })
         }
       </ul>
-      <ul className="flex items-center gap-3">
-        <li className="text-black/60">
-          myemail@email.com
-        </li>
+      <ul className="hidden md:flex items-center gap-3">
         <li>
           <NavLink
             to='/my-orders'
+            onClick={() => context.setSelectedCategory(null)}
             className={({ isActive }) => isActive? activeStyle : undefined }
           >
           My Orders
@@ -56,6 +73,7 @@ function Navbar () {
         <li>
           <NavLink
             to='/my-account'
+            onClick={() => context.setSelectedCategory(null)}
             className={({ isActive }) => isActive? activeStyle : undefined }
           >
             My Account
@@ -64,14 +82,23 @@ function Navbar () {
         <li>
           <NavLink
             to='/sign-in'
+            onClick={() => context.setSelectedCategory(null)}
             className={({ isActive }) => isActive? activeStyle : undefined }
           >
             SignIn
           </NavLink>
         </li>
         <li>
-          <NavLink className='flex items-end' onClick={() => context.openChecking()}>
-            <ShoppingBagIcon className="h-6 w-6"/> {context.cartProducts.length}
+          <NavLink className='flex items-end text-purple-500' onClick={() => context.openChecking()}>
+            <ShoppingBagIcon className="h-6 w-6"/> <b>{context.cartProducts.length}</b>
+          </NavLink>
+        </li>
+      </ul>
+      <ul className="flex md:hidden items-center gap-1">
+        <RoutesDropDown/>
+        <li>
+          <NavLink className='flex items-end text-purple-500' onClick={() => context.openChecking()}>
+            <ShoppingBagIcon className="h-6 w-6"/> <b>{context.cartProducts.length}</b>
           </NavLink>
         </li>
       </ul>
