@@ -1,10 +1,19 @@
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+import { AppRoutes } from '../../Routes/AppRoutes';
+import { Navbar } from '../../Components/Navbar';
+import { StoreProvider } from '../../Context';
+import { CheckoutSideMenu } from '../../Components/CheckoutSideMenu';
 
 function App() {
   return (
-    <>
-      <h1>I Need It!</h1>
-    </>
+    <StoreProvider>
+      <BrowserRouter>
+        <AppRoutes/>
+        <Navbar />
+        <CheckoutSideMenu/>
+      </BrowserRouter>
+    </StoreProvider>
   )
 }
 
