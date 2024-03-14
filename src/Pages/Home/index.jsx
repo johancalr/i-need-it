@@ -1,12 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card } from "../../Components/Card";
 import { PagesLayout } from "../../Layouts/PagesLayout";
 import { ProductDetail } from "../../Components/ProductDetail";
 import { StoreContext } from "../../Context";
 import { FaceFrownIcon } from "@heroicons/react/24/outline";
+import { useParams } from "react-router-dom";
 
 function Home() {
   const context = useContext(StoreContext);
+  const {category} = useParams();
+  const [actualCategory, setActualCategory] = useState();
+  if (category !== actualCategory) {
+    setActualCategory(category);
+  }
+  useEffect(() => {
+    context.setSelectedCategory(category);
+  }, [actualCategory]);
   return (
     <PagesLayout>
       Exclusive Products
@@ -18,7 +27,7 @@ function Home() {
         onChange={event => context.setProductSearching(event.target.value)}
       />
       {
-        (context.filteredProducts.length === 0 && context.productSearching.length > 0)
+        (context.filteredProducts.length === 0 && (context.productSearching.length > 0 || context.selectedCategory))
         ?
         <div className='text-4xl flex text-black/70 items-center'>
           Nothing Found

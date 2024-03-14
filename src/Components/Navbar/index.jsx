@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { StoreContext } from "../../Context";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import { formalizeCategory } from "../../utils"
 
 function Navbar () {
   const activeStyle = 'underline underline-offset-4'
@@ -24,46 +25,18 @@ function Navbar () {
           All
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to='/clothes'
-            className={({ isActive }) => isActive? activeStyle : undefined }
-          >
-            Clothes
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/electronics'
-            className={({ isActive }) => isActive? activeStyle : undefined }
-          >
-            Electronics
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/furnitures'
-            className={({ isActive }) => isActive? activeStyle : undefined }
-          >
-            Furnitures
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/toys'
-            className={({ isActive }) => isActive? activeStyle : undefined }
-          >
-            Toys
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/others'
-            className={({ isActive }) => isActive? activeStyle : undefined }
-          >
-            Others
-          </NavLink>
-        </li>
+        {
+          context.categories.map(category => (
+            <li key={formalizeCategory(category)}>
+              <NavLink
+                to={`/category/${formalizeCategory(category)}`}
+                className={({ isActive }) => isActive? activeStyle : undefined }
+              >
+                {category}
+              </NavLink>
+            </li>
+          ))
+        }
       </ul>
       <ul className="flex items-center gap-3">
         <li className="text-black/60">

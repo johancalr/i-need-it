@@ -15,4 +15,16 @@ const filteredProductsByTitle = (products, searchValue) => {
   );
 };
 
-export {totalPrice, filteredProductsByTitle}
+const filteredProductsByCategory = (products, category) => {
+  return products.filter(product =>
+    formalizeCategory(product.category)===category
+  );
+};
+
+const formalizeCategory = (route) => {
+  route = route.replace("'", "");
+  route = route.replace(" ", "_");
+  return route;
+}
+
+export {totalPrice, filteredProductsByTitle, filteredProductsByCategory, formalizeCategory}

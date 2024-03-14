@@ -1,12 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-import { filteredProductsByTitle } from "../utils";
+import { filteredProductsByCategory, filteredProductsByTitle } from "../utils";
 
 const StoreContext = createContext();
 
 function StoreProvider({children}) {
+  // Products
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [productSearching, setProductSearching] = useState('');
+  // Categories
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState();
   // Product detail display
   const [detailing, setDetailing] = useState(false);
   const openProductDetail = () => setDetailing(true);
@@ -25,26 +29,38 @@ function StoreProvider({children}) {
   };
   // Orders
   const [order, setOrder] = useState([]);
+  // Effects
+  // Fetch to products
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
     .then(respose => respose.json())
     .then(data => setProducts(data));
-  }, [])
+  }, []);
+  // Fetch to categories
   useEffect(() => {
-    console.log(productSearching);
+    fetch('https://fakestoreapi.com/products/categories')
+    .then(respose => respose.json())
+    .then(data => setCategories(data));
+  }, []);
+  useEffect(() => {
+    let productsToShow = [...products];
+    if (selectedCategory) {
+      productsToShow = filteredProductsByCategory(products, selectedCategory);
+    }
     if (productSearching) {
-      setFilteredProducts((filteredProductsByTitle(products, productSearching)));
+      productsToShow = filteredProductsByTitle(productsToShow, productSearching);
     }
-    else {
-      setFilteredProducts(products);
-    }
-  }, [products, productSearching]);
+    setFilteredProducts(productsToShow);
+  }, [products, productSearching, selectedCategory]);
   return (
     <StoreContext.Provider value={{
       products,
       productSearching,
       filteredProducts,
       setProductSearching,
+      categories,
+      selectedCategory,
+      setSelectedCategory,
       detailing,
       openProductDetail,
       closeProductDetail,

@@ -8,14 +8,15 @@ import { SignIn } from '../../Pages/SignIn';
 
 const AppRoutes = () => {
   let routes = useRoutes([
-    { path: '/',           element: <Home/>      },
-    { path: '/my-account', element: <MyAccount/> },
-    { path: '/my-orders',  element: <MyOrders/>  },
-    { path: '/my-orders/last',  element: <MyOrder/>  },
-    { path: '/my-order',   element: <MyOrder/>   },
-    { path: '/my-orders/:id', element: <MyOrder/>   },
-    { path: '/sign-in',    element: <SignIn/>    },
-    { path: '/*',          element: <NotFound/>  },
+    { path: '/',                   element: <Home/>      },
+    { path: '/my-account',         element: <MyAccount/> },
+    { path: '/my-orders',          element: <MyOrders/>  },
+    { path: '/my-orders/last',     element: <MyOrder/>   },
+    { path: '/my-order',           element: <MyOrder/>   },
+    { path: '/my-orders/:id',      element: <MyOrder/>   },
+    { path: '/sign-in',            element: <SignIn/>    },
+    { path: '/category/:category', element: <Home/>      },
+    { path: '/*',                  element: <NotFound/>  },
   ]);
 
   return routes;
