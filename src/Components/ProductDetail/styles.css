@@ -1,8 +1,14 @@
 .product-detail {
-  width: 360px;
+  width: 100%;
   height: calc(100vh - 80px);
+  max-height: calc(100vh - 80px);
   transition: all 0.8s;
   opacity: 1;
+}
+@media (min-width: 640px) {
+  .product-detail {
+    width: 360px;
+  }
 }
 .product-detail.closed {
   width: 250px;

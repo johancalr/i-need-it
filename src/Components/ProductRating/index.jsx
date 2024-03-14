@@ -17,7 +17,7 @@ function ProductRating({data, size}) {
 }
 
 ProductRating.defaultProps = {
-  size: 4
+  size: 5
 }
 
 export {ProductRating};

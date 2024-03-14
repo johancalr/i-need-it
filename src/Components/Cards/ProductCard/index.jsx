@@ -1,18 +1,13 @@
 import { useContext } from "react";
-import { StoreContext } from "../../Context";
+import { StoreContext } from "../../../Context";
 import { CheckIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-function Card ({data}) {
+function ProductCard ({data}) {
   const context = useContext(StoreContext);
   const showProductDetail = (productInfo) =>{
     context.setProductInfo(productInfo);
     context.openProductDetail();
     context.closeChecking();
-  };
-  const getTitle = (title) => {
-    if (title.length > 45)
-      title = title.slice(0,40)+' ...';
-    return title;
   };
   const addProductToCart = (event, productData) => {
     openCart(event);
@@ -40,7 +35,7 @@ function Card ({data}) {
     );
   };
   return(
-    <div className='bg-white cursor-pointer w-56 h-60 rounded-lg'
+    <div className='bg-white cursor-pointer w-36 h-40 sm:w-48 sm:h-52 rounded-lg'
       onClick={() => showProductDetail(data)}
     >
       <figure className='relative mb-2 w-full h-4/5'>
@@ -50,12 +45,12 @@ function Card ({data}) {
         <img className='w-full h-full object-cover rounded-lg' src={data.image} alt={`${data.title} description`} />
         {renderIcon(data.id)}
       </figure>
-      <p className='flex justify-between'>
-        <span className='text-sm font-light leading-none'>{getTitle(data.title)}</span>
-        <span className='text-lg font-medium'>${data.price}</span>
+      <p className='flex justify-between items-center'>
+        <span className='text-xs sm:text-sm font-light overflow-hidden overflow-ellipsis whitespace-nowrap'>{data.title}</span>
+        <span className='text-sm sm:text-lg font-medium'>${data.price}</span>
       </p>
     </div>
   );
 }
 
-export {Card};
+export {ProductCard};

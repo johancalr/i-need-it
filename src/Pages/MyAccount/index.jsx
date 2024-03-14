@@ -4,7 +4,8 @@ function MyAccount() {
 
   return (
     <PagesLayout>
-      MyAccount
+      <p className='py-2'>MyAccount</p>
+      <small className='font-light text-gray-400'><i>coming soon</i></small>
     </PagesLayout>
   )
 }

@@ -1,14 +1,14 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
-import { StoreContext } from "../../Context";
+import { StoreContext } from "../../../Context";
 
 function OderCard({id, title, image, price, isRemovable}) {
   const context = useContext(StoreContext);
   return(
-    <div className='flex justify-between items-center mb-2 border rounded-lg'>
+    <div className='flex justify-between items-center mb-2 border rounded-lg bg-white p-1'>
       <div className='flex items-center gap-2'>
         <figure className='w-20 min-w-20 min-h-20 h-20'>
-          <img className='w-full h-full rounded-lg object-cover' src={image} alt={title} />
+          <img className='w-full h-full rounded-lg border border-gray-200 object-cover' src={image} alt={title} />
         </figure>
         <p className='text-sm font-light'>{title}</p>
       </div>

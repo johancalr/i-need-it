@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { StoreContext } from '../../Context';
 import {ClipboardDocumentCheckIcon, XMarkIcon} from '@heroicons/react/24/outline';
-import { ProductRating } from '../ProductRating';
 import './styles.css';
-import { OderCard } from '../OrderCard';
 import { totalPrice } from '../../utils';
 import { Link } from 'react-router-dom';
+import { OderCard } from '../Cards/OrderCard';
 function CheckoutSideMenu() {
   const context = useContext(StoreContext);
   const handleCheckout = () => {

@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Card } from "../../Components/Card";
 import { PagesLayout } from "../../Layouts/PagesLayout";
 import { ProductDetail } from "../../Components/ProductDetail";
 import { StoreContext } from "../../Context";
 import { FaceFrownIcon } from "@heroicons/react/24/outline";
 import { useParams } from "react-router-dom";
+import { ProductCard } from "../../Components/Cards/ProductCard";
 
 function Home() {
   const context = useContext(StoreContext);
@@ -18,11 +18,11 @@ function Home() {
   }, [actualCategory]);
   return (
     <PagesLayout>
-      Exclusive Products
+      <p className="pt-2">Exclusive Products</p>
       <input
         type='text'
         placeholder='Search a product'
-        className='rounded-lg w-80 p-3 my-3 focus:outline-teal-500'
+        className='rounded-lg w-80 p-3 my-3 focus:outline-teal-500 text-purple-500'
         value={context.productSearching}
         onChange={event => context.setProductSearching(event.target.value)}
       />
@@ -34,10 +34,10 @@ function Home() {
           <FaceFrownIcon className='w-9 h-9'/>
         </div>
         :
-        <div className='grid gap-4 grid-cols-4 w-full max-w-screen-lg'>
+        <div className='grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 max-w-screen-lg'>
           {
             context.filteredProducts?.map(product => (
-              <Card
+              <ProductCard
                 key={product.id}
                 data={product}
               />
