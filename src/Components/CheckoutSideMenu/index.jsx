@@ -18,6 +18,8 @@ function CheckoutSideMenu() {
     };
     context.setOrder([...context.order, orderToAdd]);
     context.setCartProducts([]);
+    context.setProductSearching('');
+    context.closeChecking();
   };
   return (
     <aside className={`checkout-side-menu flex-col fixed top-20 right-0 border border-black bg-white rounded-lg p-4 ${context.checking? 'flex' : 'closed'}`}>
@@ -29,16 +31,22 @@ function CheckoutSideMenu() {
       </div>
       <div className='overflow-y-scroll flex-1'>
         {
-          context.cartProducts.map(product => (
-            <OderCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              image={product.image}
-              price={product.price}
-              isRemovable={true}
-            />
-          ))
+          context.cartProducts.length === 0
+          ?
+            <div className='text-lg flex text-black/70 items-center justify-center'>
+              No products added... yet!
+            </div>
+          :
+            context.cartProducts.map(product => (
+              <OderCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                image={product.image}
+                price={product.price}
+                isRemovable={true}
+              />
+            ))
         }
       </div>
       <div>
@@ -46,12 +54,15 @@ function CheckoutSideMenu() {
           <span>Total:</span>
           <b>$ {totalPrice(context.cartProducts)}</b>
         </p>
-        <Link to='my-orders/last'>
-          <button className='flex justify-center items-center py-2 w-full bg-black rounded-lg text-teal-500 text-lg' onClick={() => handleCheckout()}>
-            Checkout
-            <ClipboardDocumentCheckIcon className='w-6 h-6 ms-2'/>
-          </button>
-        </Link>
+        {
+          context.cartProducts.length > 0 &&
+          <Link to='my-orders/last'>
+            <button className='flex justify-center items-center py-2 w-full bg-black rounded-lg text-teal-500 text-lg' onClick={() => handleCheckout()}>
+              Checkout
+              <ClipboardDocumentCheckIcon className='w-6 h-6 ms-2'/>
+            </button>
+          </Link>
+        }
       </div>
     </aside>
   );

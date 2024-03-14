@@ -56,8 +56,8 @@ function StoreProvider({children}) {
     <StoreContext.Provider value={{
       products,
       productSearching,
-      filteredProducts,
       setProductSearching,
+      filteredProducts,
       categories,
       selectedCategory,
       setSelectedCategory,

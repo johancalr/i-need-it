@@ -26,16 +26,19 @@ function Navbar () {
           </NavLink>
         </li>
         {
-          context.categories.map(category => (
-            <li key={formalizeCategory(category)}>
-              <NavLink
-                to={`/category/${formalizeCategory(category)}`}
-                className={({ isActive }) => isActive? activeStyle : undefined }
-              >
-                {category}
-              </NavLink>
-            </li>
-          ))
+          context.categories.map(category => {
+            const formalizedCategory = formalizeCategory(category);
+            return (
+              <li key={formalizedCategory}>
+                <NavLink
+                  to={`/category/${formalizedCategory}`}
+                  className={({ isActive }) => isActive? activeStyle : undefined }
+                >
+                  {category}
+                </NavLink>
+              </li>
+            )
+          })
         }
       </ul>
       <ul className="flex items-center gap-3">
@@ -67,7 +70,7 @@ function Navbar () {
           </NavLink>
         </li>
         <li>
-          <NavLink className='flex items-end'>
+          <NavLink className='flex items-end' onClick={() => context.openChecking()}>
             <ShoppingBagIcon className="h-6 w-6"/> {context.cartProducts.length}
           </NavLink>
         </li>
